@@ -1,7 +1,45 @@
 
-# Dynamic Programmings
+# Dynamic Programming
 
+## Policy Evaluation
+Evaluate a given policy π
 
+```pseudocode
+function policy_eval(policy, env)
+{
+	/* policy is a function of state [agent specific], returns action's prob distribution */
+	
+	Val = dict()  /* value function, of state, returns "value" */
+	
+	while true  /* set a terminal state when update diff undistinguished */
+	{
+		for s in env.state  /* to update the whole state set */
+		{
+			v = 0
+			for action, action_prob in policy(s) /* one step lookahead */
+			{
+				for tran_prob, next_state, reward, done in env.P[s][action]
+				{
+					v += action_prob * (reward + discount_factor * tran_prob * Val[next_state])
+				}
+			}
+			
+			Val[s] = v  /* backup, newly assign | v_k+1 = ... */
+		}
+		
+	}
+	
+	return Val
+}
+```
+
+## Policy Iteration
+Improve a policy
+
+```pseudocode
+function 
+
+```
 
 
 
