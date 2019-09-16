@@ -7,7 +7,7 @@ Evaluate a given policy π
 ```pseudocode
 function policy_eval(policy, env)
 {
-	/* policy is a function of state [agent specific], returns action's prob distribution */
+	/* policy is a function of state [any policy as agent specified], returns action's prob distribution */
 	
 	Val = dict()  /* value function, of state, returns "value" */
 	
@@ -37,7 +37,33 @@ function policy_eval(policy, env)
 Improve a policy
 
 ```pseudocode
-function 
+
+
+while true
+{
+	/* 1: evaluate current policy */
+	Val = policy_eval(policy, env)
+	
+	for s in env.state
+	{
+		/* one step lookahead */
+		for action, action_prob in policy(s)
+		{
+			for tran_prob, next_state, reward, done in env.P[s][action]
+			{
+				Q_tmp += action_prob * (rewards + discount_factor * tran_prob * Val[next_state])
+			}
+		}
+		
+		/* 2: greedy update each state of the certain policy */
+		policy[s] = find_best_action(Q_tmp)
+		
+	}
+	
+	
+	
+}
+
 
 ```
 
