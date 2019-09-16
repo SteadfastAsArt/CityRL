@@ -33,11 +33,11 @@ function policy_eval(policy, env)
 }
 ```
 
+
 ## Policy Iteration
 Improve a policy
 
 ```pseudocode
-
 
 while true
 {
@@ -60,10 +60,15 @@ while true
 		
 	}
 	
-	
-	
 }
 
+
+```
+
+## Value Iteration
+
+
+```pseudocode
 
 ```
 
