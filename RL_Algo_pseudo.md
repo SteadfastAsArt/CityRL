@@ -1,5 +1,6 @@
-
 # Dynamic Programming
+
+Fill up and update the table of (action, state) pair using greedy policy, which is proven to converge to a certain point.
 
 ## Policy Evaluation
 Evaluate a given policy π
@@ -23,7 +24,6 @@ function policy_eval(policy, env)
 					v += action_prob * (reward + discount_factor * tran_prob * Val[next_state])
 				}
 			}
-			
 			Val[s] = v  /* backup, newly assign | v_k+1 = ... */
 		}
 		
