@@ -16,7 +16,7 @@ function policy_eval(policy, env)
 		for s in env.state  /* to update the whole state set */
 		{
 			v = 0
-			for action, action_prob in policy(s) /* one step lookahead */
+			for action, action_prob in policy(s) /* summon up all techniques */
 			{
 				for tran_prob, next_state, reward, done in env.P[s][action]
 				{
@@ -35,27 +35,31 @@ function policy_eval(policy, env)
 
 
 ## Policy Iteration
-Improve a policy
+Goal is to improve a policy
+
+`Evaluation` part has done most of the improving jobs
 
 ```pseudocode
 
 while true
 {
-	/* 1: evaluate current policy */
+	/* 1: Evaluate current policy, returns a value function */
 	Val = policy_eval(policy, env)
 	
 	for s in env.state
 	{
-		/* one step lookahead */
+		/* one step lookahead start */
 		for action, action_prob in policy(s)
 		{
 			for tran_prob, next_state, reward, done in env.P[s][action]
 			{
-				Q_tmp += action_prob * (rewards + discount_factor * tran_prob * Val[next_state])
+				A[action] += discount_factor * tran_prob * Val[next_state]
 			}
+			A[action] += rewards
 		}
+		/* one step lookahead end */
 		
-		/* 2: greedy update each state of the certain policy */
+		/* 2: Greedy update each state of the certain policy */
 		policy[s] = find_best_action(Q_tmp)
 		
 	}
@@ -67,8 +71,38 @@ while true
 
 ## Value Iteration
 
+Goal is to find an optimal policy
+
 
 ```pseudocode
+
+while true:
+{
+	init Val
+	for s in env.state
+	{
+		/* one step lookahead start */
+		for action, action_prob in policy(s)
+		{
+			for tran_prob, next_state, reward, done in env.P[s][action]
+			{
+				A[action] += discount_factor * tran_prob * Val[next_state]
+			}
+			A[action] += rewards
+		}
+		/* one step lookahead end */
+        
+        best_action_val = max(A)
+        Val[s] = best_action_val
+	}
+}
+
+for s in env.state
+{
+	one step lookahead to find best action in s
+	update policy
+}
+
 
 ```
 
