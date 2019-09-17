@@ -1,6 +1,6 @@
 # Dynamic Programming
 
-Fill up and update the table of (action, state) pair using greedy policy, which is proven to converge to a certain point.
+Fill up and update the table of (action, state) pair using [ greedy policy + iterative successive state transitions ], which is proven to converge to a certain point.
 
 ## Policy Evaluation
 Evaluate a given policy π
@@ -148,6 +148,7 @@ for e in [1..episode]
          * Following the theory of q-learning always gets a better pai',
          * choose the argmax(next_state), compute target
          * update Q(s, _action)
+         * fix the Q_hat for certain steps
          */
         best_next_action = argmax(Q_hat[next_state])
         td_target = reward + discount_factor * Q_hat[next_state][best_next_action]
@@ -168,4 +169,20 @@ for e in [1..episode]
 
 
 # Deep Q Learning
+
+Replace Q-look up table to NN
+- Input: State
+- Output: Probability distribution of each actions.
+
+
+
+
+
+
+
+
+
+
+
+
 
