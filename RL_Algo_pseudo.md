@@ -2,7 +2,10 @@
 
 Fill up and update the table of (action, state) pair using [ greedy policy + iterative successive state transitions ], which is proven to converge to a certain point.
 
+
+
 ## Policy Evaluation
+
 Evaluate a given policy π
 
 ```pseudocode
@@ -34,7 +37,9 @@ function policy_eval(policy, env)
 ```
 
 
+
 ## Policy Iteration
+
 Goal is to improve a policy
 
 `Evaluation` part has done most of the improving jobs
@@ -68,6 +73,8 @@ while true
 
 
 ```
+
+
 
 ## Value Iteration
 
@@ -112,6 +119,8 @@ for s in env.state
 # Q Learning
 Off-policy TD control
 
+Goal is to find an $Q_*(s, a)$
+
 ```pseudocode
 create env
 override env.step(), env.
@@ -148,7 +157,7 @@ for e in [1..episode]
          * Following the theory of q-learning always gets a better pai',
          * choose the argmax(next_state), compute target
          * update Q(s, _action)
-         * fix the Q_hat for certain steps
+         * fix the Q_hat for certain steps to avoid oscillate
          */
         best_next_action = argmax(Q_hat[next_state])
         td_target = reward + discount_factor * Q_hat[next_state][best_next_action]
@@ -164,25 +173,19 @@ for e in [1..episode]
     }
 
 }
-	
+
 ```
 
 
 # Deep Q Learning
 
-Replace Q-look up table to NN
+Replace Q-look up table to NN, and design q-function relevant loss functions
 - Input: State
 - Output: Probability distribution of each actions.
 
 
+# Policy Gradient
 
-
-
-
-
-
-
-
-
+## Actor-Critic
 
 
